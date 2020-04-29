@@ -1,22 +1,16 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Todos from './components/Todos';
+import TodoDetails from './components/TodoDetails';
 
-/*
-install react-router-dom
-import react-router-dom in this file
-use Browserrouter, switch and Route to set up 
-your navigation
- example
- <BrowserRouter>
-    <Switch>
-      <Route path="/users" component={usersView} />
-    <Switch/>
- </BrowserRouter>
-*/
-
-const App = () => { // es6 standard function App(){ }
+const App = () => {
   return (
-    <Todos />
+    <BrowserRouter>
+      <Switch>
+        <Route path='/' component={Todos} exact />
+        <Route path='/todo/:id' component={TodoDetails} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

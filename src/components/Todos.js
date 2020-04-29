@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
 import Todo from './Todo.js'
-import axios from 'axios';
-//import Home from './Pages/Home';
-import Nav from './Pages/Nav';
-import About from './Pages/About';
+import axios from 'axios'
+
 class Todos extends Component {
 
     state = {
@@ -15,7 +12,7 @@ class Todos extends Component {
     }
     fetchTodos = () => {
         axios.get('https://jsonplaceholder.typicode.com/todos').then((res) => {
-            console.log('response', res.data)
+            console.log('response', res)
             if (res) {
                 const data = res.data.slice(0, 12)
                 this.setState({ todos: data })
@@ -28,23 +25,17 @@ class Todos extends Component {
     render() {
         const todos = this.state.todos;
         return (
-            <Router>
-                <div>
-                    <Nav />
-                    <Switch>
-                        <Route exact path='/' render={props => (
-                            <React.Fragment>
-                                {todos.map((todo) => {
-                                    return (<Todo key={todo.id} name={todo.title} id={todo.id} />);
-                                })}
-                            </React.Fragment>
-                        )} />
-                        <Route path='/about' component={About} />
+            <div style={{display:'flex', flexDirection:'row'}}>
+            <div>{todos.map((todo) => {
+                return (
+                    <Todo key={todo.id} name={todo.title} id={todo.id} />);
+            })}
+            </div>
+            <div style={{marginLeft:'100px'}}>
+                <input name="title"></input>
+            </div>
+            </div>)
 
-                    </Switch>
-                </div>
-            </Router>
-        )
     }
 }
 

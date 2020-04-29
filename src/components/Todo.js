@@ -8,7 +8,7 @@ class Todo extends Component {
         const id = this.props.id || '';
         return (
             <div style={{ background: '#009688', height: '40px', marginBottom: '10px', color: '#fff' }}>
-                <Link to={``}><span>{id + ". "}</span> <span>{name}</span></Link>
+                <Link to={`/todo/${id}`}><span>{id + ". "}</span> <span>{name}</span></Link>
             </div>
 
         )
