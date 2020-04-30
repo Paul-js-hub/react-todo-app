@@ -9,10 +9,16 @@ class Todo extends Component {
         return (
             <div style={{ background: '#009688', height: '40px', marginBottom: '10px', color: '#fff' }}>
                 <Link to={`/todo/${id}`}><span>{id + ". "}</span> <span>{name}</span></Link>
+                <button style={btnStyle} type="delete" onClick={() =>this.props.onDelete(this.props.id) }>Delete</button>
             </div>
 
         )
     }
+}
+
+const btnStyle={
+    float:'right',
+    cursor:'pointer'
 }
 
 export default Todo;
