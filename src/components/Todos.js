@@ -38,15 +38,23 @@ class Todos extends Component {
     }
 
     onChange = (e) => {
-        const title = e.target.value || '';
+        const title = e.target.value || ''; //setting a new value for title
         const todo = { title }
         this.setState({ todo })
     }
-    deleteTodo = userId => {
+
+    updateTodo = (userId) => {
+        //title.preventDefault();
+        const newTodo ={
+            title:this.state.title
+        }
+        axios.put('https://jsonplaceholder.typicode.com/todos/{userId}', newTodo)
+            .then(res => console.log("response", res));
+    }
+
+    deleteTodo = (userId) => {
         if (window.confirm('Are you sure?')) {
-            fetch('https://jsonplaceholder.typicode.com/todos/1', {
-                method: 'DELETE'
-            })
+            axios.delete('https://jsonplaceholder.typicode.com/todos/{userId}')
         }
     }
 
@@ -57,7 +65,8 @@ class Todos extends Component {
                 <div>{todos.map((todo) => {
                     return (
                         <Todo key={todo.id} name={todo.title} id={todo.id}
-                            onDelete={this.deleteTodo} />);
+                            onDelete={this.deleteTodo}
+                            onUpdate={this.updateTodo} />);
                 })}
                 </div>
                 <div style={{ marginLeft: '100px' }}>
